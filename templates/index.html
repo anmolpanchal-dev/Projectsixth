@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}IrisAI — Flower Species Classifier{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="badge animate-in">Machine Learning · Botany</div>
+    <h1 class="hero-title animate-in delay-1">
+      Identify Any<br/><em>Iris Flower</em><br/>Instantly
+    </h1>
+    <p class="hero-sub animate-in delay-2">
+      Enter four simple measurements and our Random Forest model will classify the species in milliseconds with high accuracy.
+    </p>
+    <div class="hero-actions animate-in delay-3">
+      <a href="/predict" class="btn btn-primary">Try the Predictor →</a>
+      <a href="/about" class="btn btn-ghost">How It Works</a>
+    </div>
+  </div>
+  <div class="hero-visual animate-in delay-2">
+    <div class="flower-card">
+      <div class="flower-icon">🌸</div>
+      <div class="flower-species">Iris Setosa</div>
+      <div class="flower-conf">98.4% confidence</div>
+      <div class="flower-bars">
+        <div class="bar-row"><span>Setosa</span><div class="bar"><div class="bar-fill" style="width:98%"></div></div><span>98%</span></div>
+        <div class="bar-row"><span>Versicolor</span><div class="bar"><div class="bar-fill" style="width:1%"></div></div><span>1%</span></div>
+        <div class="bar-row"><span>Virginica</span><div class="bar"><div class="bar-fill" style="width:1%"></div></div><span>1%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-card animate-slide">
+      <div class="stat-num">150</div>
+      <div class="stat-label">Training Samples</div>
+    </div>
+    <div class="stat-card animate-slide delay-1">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Flower Species</div>
+    </div>
+    <div class="stat-card animate-slide delay-2">
+      <div class="stat-num">96%+</div>
+      <div class="stat-label">Model Accuracy</div>
+    </div>
+    <div class="stat-card animate-slide delay-3">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Input Features</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIES CARDS -->
+<section class="species-section">
+  <div class="section-header">
+    <h2>The Three Species</h2>
+    <p>Our model can distinguish between these three Iris varieties</p>
+  </div>
+  <div class="species-grid">
+    <div class="species-card">
+      <div class="species-emoji">🌸</div>
+      <h3>Iris Setosa</h3>
+      <p>Smallest of the three, found in Arctic regions. Known for its distinctive small petals and compact form.</p>
+      <div class="species-traits">
+        <span>Short Petals</span><span>Arctic Origin</span>
+      </div>
+    </div>
+    <div class="species-card featured">
+      <div class="species-badge">Most Common</div>
+      <div class="species-emoji">🌺</div>
+      <h3>Iris Versicolor</h3>
+      <p>The blue flag iris, native to North America. Medium-sized with characteristic purple-blue blooms.</p>
+      <div class="species-traits">
+        <span>Medium Size</span><span>North America</span>
+      </div>
+    </div>
+    <div class="species-card">
+      <div class="species-emoji">🌷</div>
+      <h3>Iris Virginica</h3>
+      <p>The Southern blue flag. Largest of the three with wide petals, found in eastern North America.</p>
+      <div class="species-traits">
+        <span>Large Petals</span><span>Eastern USA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Ready to Classify?</h2>
+    <p>Takes less than 10 seconds. Just four measurements needed.</p>
+    <a href="/predict" class="btn btn-primary btn-lg">Start Predicting →</a>
+  </div>
+</section>
+
+{% endblock %}

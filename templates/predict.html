@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block title %}Predict — IrisAI{% endblock %}
+
+{% block content %}
+<section class="predict-hero">
+  <div class="predict-header">
+    <div class="badge">AI Classifier</div>
+    <h1>Species <em>Predictor</em></h1>
+    <p>Enter the four measurements below to identify the Iris species</p>
+  </div>
+</section>
+
+<section class="predict-section">
+  <div class="predict-layout">
+
+    <!-- FORM CARD -->
+    <div class="form-card animate-in">
+      <div class="form-card-header">
+        <span>📐</span>
+        <h3>Enter Measurements</h3>
+        <p>All values in centimeters (cm)</p>
+      </div>
+
+      <form action="/predict" method="POST" id="predictForm">
+        <div class="input-grid">
+          <div class="input-group">
+            <label for="sepal_length">
+              <span class="input-icon">🌿</span>
+              Sepal Length
+            </label>
+            <div class="input-wrap">
+              <input type="number" name="sepal_length" id="sepal_length"
+                     step="0.1" min="4.0" max="8.0"
+                     placeholder="e.g. 5.1" required
+                     oninput="updateSlider('sl', this.value)"/>
+              <span class="input-unit">cm</span>
+            </div>
+            <input type="range" class="slider" id="sl" min="4.0" max="8.0" step="0.1" value="5.5"
+                   oninput="syncInput('sepal_length', this.value)"/>
+            <div class="range-labels"><span>4.0</span><span>8.0</span></div>
+          </div>
+
+          <div class="input-group">
+            <label for="sepal_width">
+              <span class="input-icon">🌿</span>
+              Sepal Width
+            </label>
+            <div class="input-wrap">
+              <input type="number" name="sepal_width" id="sepal_width"
+                     step="0.1" min="2.0" max="4.5"
+                     placeholder="e.g. 3.5" required
+                     oninput="updateSlider('sw', this.value)"/>
+              <span class="input-unit">cm</span>
+            </div>
+            <input type="range" class="slider" id="sw" min="2.0" max="4.5" step="0.1" value="3.2"
+                   oninput="syncInput('sepal_width', this.value)"/>
+            <div class="range-labels"><span>2.0</span><span>4.5</span></div>
+          </div>
+
+          <div class="input-group">
+            <label for="petal_length">
+              <span class="input-icon">🌺</span>
+              Petal Length
+            </label>
+            <div class="input-wrap">
+              <input type="number" name="petal_length" id="petal_length"
+                     step="0.1" min="1.0" max="7.0"
+                     placeholder="e.g. 1.4" required
+                     oninput="updateSlider('pl', this.value)"/>
+              <span class="input-unit">cm</span>
+            </div>
+            <input type="range" class="slider" id="pl" min="1.0" max="7.0" step="0.1" value="3.5"
+                   oninput="syncInput('petal_length', this.value)"/>
+            <div class="range-labels"><span>1.0</span><span>7.0</span></div>
+          </div>
+
+          <div class="input-group">
+            <label for="petal_width">
+              <span class="input-icon">🌺</span>
+              Petal Width
+            </label>
+            <div class="input-wrap">
+              <input type="number" name="petal_width" id="petal_width"
+                     step="0.1" min="0.1" max="2.5"
+                     placeholder="e.g. 0.2" required
+                     oninput="updateSlider('pw', this.value)"/>
+              <span class="input-unit">cm</span>
+            </div>
+            <input type="range" class="slider" id="pw" min="0.1" max="2.5" step="0.1" value="1.2"
+                   oninput="syncInput('petal_width', this.value)"/>
+            <div class="range-labels"><span>0.1</span><span>2.5</span></div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+            <span class="btn-text">Classify Species →</span>
+            <span class="btn-loading" style="display:none">Analyzing...</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-full" onclick="clearForm()">Clear Form</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- RESULT + TIPS PANEL -->
+    <div class="side-panel">
+
+      {% if prediction_text %}
+      <div class="result-card show animate-pop">
+        <div class="result-icon">
+          {% if 'setosa' in prediction_text.lower() %}🌸
+          {% elif 'versicolor' in prediction_text.lower() %}🌺
+          {% else %}🌷{% endif %}
+        </div>
+        <div class="result-label">Predicted Species</div>
+        <div class="result-species">
+          {% if 'setosa' in prediction_text.lower() %}Iris Setosa
+          {% elif 'versicolor' in prediction_text.lower() %}Iris Versicolor
+          {% else %}Iris Virginica{% endif %}
+        </div>
+        <div class="result-raw">{{ prediction_text }}</div>
+        <a href="/predict" class="btn btn-ghost btn-sm">Try Another →</a>
+      </div>
+      {% else %}
+      <div class="result-placeholder">
+        <div class="placeholder-icon">🔬</div>
+        <p>Your prediction result will appear here after you submit the form.</p>
+      </div>
+      {% endif %}
+
+      <!-- QUICK PRESETS -->
+      <div class="presets-card">
+        <h4>Quick Presets</h4>
+        <p>Load example measurements for each species</p>
+        <div class="preset-btns">
+          <button class="preset-btn" onclick="loadPreset(5.1, 3.5, 1.4, 0.2)">🌸 Setosa</button>
+          <button class="preset-btn" onclick="loadPreset(7.0, 3.2, 4.7, 1.4)">🌺 Versicolor</button>
+          <button class="preset-btn" onclick="loadPreset(6.3, 3.3, 6.0, 2.5)">🌷 Virginica</button>
+        </div>
+      </div>
+
+      <!-- TIP CARD -->
+      <div class="tip-card">
+        <span>💡</span>
+        <div>
+          <strong>Measurement Tips</strong>
+          <p>Measure from the base to tip of each petal and sepal. Use a ruler for best accuracy.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

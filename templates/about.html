@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}About — IrisAI{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="badge">Under the Hood</div>
+  <h1>How It <em>Works</em></h1>
+  <p>The science and technology behind IrisAI</p>
+</section>
+
+<section class="about-section">
+  <div class="about-grid">
+
+    <div class="about-card animate-in">
+      <div class="about-num">01</div>
+      <div class="about-icon">📊</div>
+      <h3>Data Collection</h3>
+      <p>The famous Fisher Iris dataset contains 150 samples across three species. Each sample has four measurements: sepal length, sepal width, petal length, and petal width.</p>
+    </div>
+
+    <div class="about-card animate-in delay-1">
+      <div class="about-num">02</div>
+      <div class="about-icon">⚙️</div>
+      <h3>Preprocessing</h3>
+      <p>Species labels are encoded numerically using scikit-learn's LabelEncoder. Data is split 80/20 into training and test sets with a fixed random seed for reproducibility.</p>
+    </div>
+
+    <div class="about-card animate-in delay-2">
+      <div class="about-num">03</div>
+      <div class="about-icon">🌲</div>
+      <h3>Random Forest</h3>
+      <p>An ensemble of decision trees votes on the species. Each tree is trained on a random subset of data, and the majority vote becomes the final prediction — robust to noise.</p>
+    </div>
+
+    <div class="about-card animate-in delay-3">
+      <div class="about-num">04</div>
+      <div class="about-icon">🎯</div>
+      <h3>Prediction</h3>
+      <p>Your four measurements are passed to the trained model. The predicted numeric label is decoded back to the species name and displayed instantly.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODEL DETAILS -->
+<section class="model-section">
+  <div class="section-header">
+    <h2>Model Details</h2>
+    <p>Technical specifications</p>
+  </div>
+
+  <div class="model-table-wrap">
+    <table class="model-table">
+      <thead>
+        <tr><th>Property</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Algorithm</td><td>Random Forest Classifier</td></tr>
+        <tr><td>Library</td><td>scikit-learn</td></tr>
+        <tr><td>Training Samples</td><td>120 (80% of 150)</td></tr>
+        <tr><td>Test Samples</td><td>30 (20% of 150)</td></tr>
+        <tr><td>Input Features</td><td>4 (sepal/petal L & W)</td></tr>
+        <tr><td>Output Classes</td><td>3 (Setosa, Versicolor, Virginica)</td></tr>
+        <tr><td>Typical Accuracy</td><td>~96–100%</td></tr>
+        <tr><td>Backend Framework</td><td>Flask (Python)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="stack-section">
+  <div class="section-header">
+    <h2>Tech Stack</h2>
+  </div>
+  <div class="stack-grid">
+    <div class="stack-item"><span>🐍</span><strong>Python 3</strong><small>Core language</small></div>
+    <div class="stack-item"><span>🌶️</span><strong>Flask</strong><small>Web framework</small></div>
+    <div class="stack-item"><span>🤖</span><strong>scikit-learn</strong><small>ML model</small></div>
+    <div class="stack-item"><span>🐼</span><strong>Pandas</strong><small>Data handling</small></div>
+    <div class="stack-item"><span>🔢</span><strong>NumPy</strong><small>Numerical ops</small></div>
+    <div class="stack-item"><span>🎨</span><strong>HTML/CSS/JS</strong><small>Frontend</small></div>
+  </div>
+</section>
+
+{% endblock %}
